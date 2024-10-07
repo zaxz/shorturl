@@ -1,0 +1,17 @@
+@font-face {
+    font-family: 'blank-river';
+    src: url(../assets/Blank-River.ttf);
+}
+@font-face {
+    font-family: 'Poppins';
+    src: url(../assets/Poppins-Regular.otf);
+}
+body{
+    font-family: 'Poppins';
+}
+.judul{
+    font-size: 80px !important;
+}
+.ea{
+    font-family: 'blank-river';
+}

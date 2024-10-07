@@ -11,19 +11,21 @@ class ShortlinkController extends Controller
     public function index()
     {
         $shortlinks = Shortlink::latest()->get();
-        return view('shortenlink',compact('shortlinks'));
+        return view('home',compact('shortlinks'));
     }
     public function store(Request $request)
     {
         $request->validate([
             'link'=>'required|url'
         ]);
-        $input['link']=$request->link;
-        $input['code']=Str::random(6);
-        Shortlink::create($input);
+        $shortLink = ShortLink::create([
+            'link' => $request->link,
+            'code' => Str::random(6), // Misalnya, buat kode acak
+        ]);
 
-
-        return redirect('generate-shorten-link')->withSuccess('berhasil');
+        session()->flash('success', 'Link pendek Anda: ' . route('shorten.link', $shortLink->code));
+        session()->flash('shortlink', route('shorten.link', $shortLink->code));
+        return redirect()->back()->with('success', 'Link berhasil dibuat!');
     }
     public function shortenlink($code)
     {
