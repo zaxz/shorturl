@@ -1,12 +1,11 @@
 <?php
 
-use App\Http\Controllers\ShortlinkController;
+use App\Http\Controllers\ShortURLController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/',[ShortURLController::class, 'index']);
+Route::post('/',[ShortURLController::class, 'store'])->name('generate');
+Route::get('/{code}',[ShortURLController::class, 'shortenedUrl'])->name('shortened.url');
 Route::get('error-page', function () {
     return view('error-page');
 });
-
-Route::get('/',[ShortlinkController::class, 'index']);
-Route::post('/',[ShortlinkController::class, 'store'])->name('generate.shorturl');
-Route::get('/{code}',[ShortlinkController::class, 'shortenlink'])->name('shorten.link');

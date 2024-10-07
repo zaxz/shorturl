@@ -19,11 +19,11 @@
         @endif
         <div class="card mb-3">
             <div class="card-header text-center">
-                <form action="{{ route('generate.shorturl') }}" method="post">
+                <form action="{{ route('generate') }}" method="post">
                     @csrf
                     <h2 class="pt-2">Paste the URL to be shortened</h2>
                     <div class="container">
-                        <input type="text" name="link" class="form-control" placeholder="Enter URL">
+                        <input type="text" name="url" class="form-control" placeholder="Enter URL">
                         <button type="submit" class="btn btn-dark w-100 ">Generate</button>
                         <br>
                         <br>
@@ -31,8 +31,8 @@
                             <div>
                                 <h2 class="">Here it is!</h2>
                                 <div class="input-group">
-                                    <input id="shortlink" type="text" class="form-control"
-                                        value="{{ session('shortlink') }}">
+                                    <input id="shortUrl" type="text" class="form-control"
+                                        value="{{ session('shortened') }}">
                                     <div class="input-group-addon">
                                         <button type="button" class="btn btn-dark " onclick="copyToClipboard()">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -46,17 +46,19 @@
                                     </div>
                                     <script>
                                         function copyToClipboard() {
-                                            let shortlink = document.getElementById("shortlink");
-                                            shortlink.select();
-                                            navigator.clipboard.writeText(shortlink.value);
-                                            alert("Copied : " + shortlink.value);
+                                            let shortUrl = document.getElementById("shortUrl");
+                                            shortUrl.select();
+                                            navigator.clipboard.writeText(shortUrl.value);
+                                            alert("Copied : " + shortUrl.value);
                                         }
                                     </script>
                                 </div>
+                                <p class="text-start pt-2">Original URL : <a href="{{ session('ori_url') }}"
+                                        target="_blank">{{ session('ori_url') }}</a></p>
                             </div>
                         @endif
                     </div>
-                    @error('link')
+                    @error('url')
                         <p class="m-0 p-0 text-danger">{{ $message }}</p>
                     @enderror
                 </form>
@@ -72,12 +74,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($shortlinks as $row)
+                    @foreach ($data_url as $row)
                         <tr>
                             <td>{{ $row->id }}</td>
-                            <td><a href="{{ route('shorten.link', $row->code) }}"
-                                    target="_blank">{{ route('shorten.link', $row->code) }}</a></td>
-                            <td>{{ $row->link }}</td>
+                            <td><a href="{{ route('shortened.url', $row->code) }}"
+                                    target="_blank">{{ route('shortened.url', $row->code) }}</a></td>
+                            <td>{{ $row->url }}</td>
                         </tr>
                     @endforeach
                 </tbody>
