@@ -37,7 +37,7 @@ class ShortURLController extends Controller
     {
         $find = ShortURL::where('code', $code)->first();
         if (!$find) {
-            return redirect('error-page');
+            return redirect('error');
         }
         return redirect($find->url);
     }

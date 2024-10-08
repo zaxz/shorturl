@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="styles/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles/style.css">
     <script src="styles/bootstrap/js/bootstrap.min.js"></script>
-    <title>Short URL</title>
+    <title>Short URL - Jeki's Here</title>
 </head>
 
 <body>
@@ -69,8 +69,8 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Short Link</th>
-                        <th>Link</th>
+                        <th>Short URL</th>
+                        <th>URL</th>
                     </tr>
                 </thead>
                 <tbody>
