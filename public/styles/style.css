@@ -15,3 +15,7 @@ body{
 .ea{
     font-family: 'blank-river';
 }
+.container-error{
+    width: 100vw;
+    height: 100vh;
+}

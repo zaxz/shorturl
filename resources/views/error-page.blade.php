@@ -9,7 +9,13 @@
     <script src="styles/bootstrap/js/bootstrap.min.js"></script>
     <title>Error Page</title>
 </head>
-<body>
-    <p>salah jalan bang</p>
+<body class="bg-dark">
+    <div class="container-error d-flex justify-content-center">
+        <div class="align-content-center text-white text-center">
+            <h1>NGAPAIN KESINI?</h1>
+            <h1>INI JALAN BUNTU BANG</h1>
+            <a href="/" class="text-danger"><h1>BALIK SINI</h1></a>
+        </div>
+    </div>
 </body>
 </html>
