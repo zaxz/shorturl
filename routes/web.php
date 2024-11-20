@@ -9,7 +9,9 @@ Route::get('/error', fn()=> view('error-page'));
 
 
 Route::get('/',[ShortURLController::class, 'index']);
-Route::post('/',[ShortURLController::class, 'store'])->name('generate');
+Route::get('/edit',[ShortURLController::class, 'edit'])->name('shorturl.edit');
+Route::post('/generate',[ShortURLController::class, 'store'])->name('generate');
+Route::delete('/{id}',[ShortURLController::class, 'delete'])->name('shorturl.delete');
 
 Route::get('/register', fn()=> view('auth.register'))->middleware('guest');
 Route::post('/register',[AuthController::class, 'register'])->name('register');

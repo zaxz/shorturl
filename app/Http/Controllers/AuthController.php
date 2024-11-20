@@ -21,7 +21,9 @@ class AuthController extends Controller
 
         $user->save();
 
-        return redirect('/');
+        Auth::login($user);
+
+        return redirect()->intended('/');
     }
 
     public function login(Request $request)

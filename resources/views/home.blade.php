@@ -36,23 +36,23 @@
                     <h2 class="">Paste the URL to be shortened</h2>
                     <input type="text" name="inputUrl" class="form-control" placeholder="Enter URL"
                         value="{{ old('inputUrl') }}">
-                        @auth
-                            <div class="input-group">
-                                <span class="input-group-text">{{ route('generate') }}/</span>
-                                <input type="text" name="customUrl" class="form-control" placeholder="Enter custom URL">
-                            </div>
-                        @else
-                            <h5 class="mx-auto mt-3 text-secondary">Login to access custom URL</h5>
-                            <div class="input-group">
-                                <span class="input-group-text text-secondary">{{ route('generate') }}/</span>
-                                <input type="text" name="customUrl" class="form-control text-secondary" placeholder="Enter custom URL"
-                                    disabled>
-                            </div>
-                        @endauth
-                        @error('customUrl')
-                            <p class="m-0 p-0 text-danger">{{ $message }}</p>
-                        @enderror
-                        <button type="submit" class="btn btn-dark w-100 mt-2">Generate</button>
+                    @auth
+                        <div class="input-group">
+                            <span class="input-group-text">{{ url('/') }}/</span>
+                            <input type="text" name="customUrl" class="form-control" placeholder="Enter custom URL">
+                        </div>
+                    @else
+                        <h5 class="mx-auto mt-3 text-secondary">Login to access custom URL</h5>
+                        <div class="input-group">
+                            <span class="input-group-text text-secondary">{{ route('generate') }}/</span>
+                            <input type="text" name="customUrl" class="form-control text-secondary"
+                                placeholder="Enter custom URL" disabled>
+                        </div>
+                    @endauth
+                    @error('customUrl')
+                        <p class="m-0 p-0 text-danger">{{ $message }}</p>
+                    @enderror
+                    <button type="submit" class="btn btn-dark w-100 mt-2">Generate</button>
 
                     @if (session('success'))
                         <div>
@@ -90,27 +90,43 @@
                 </form>
             </div>
         </div>
-        {{-- <div class="table-responsive">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Short URL</th>
-                        <th>URL</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($data_url as $row)
+        @auth
+            <div class="table-responsive ">
+                <table class="table">
+                    <thead>
                         <tr>
-                            <td>{{ $row->id }}</td>
-                            <td><a href="{{ route('shortened.url', $row->code) }}"
-                                    target="_blank">{{ route('shortened.url', $row->code) }}</a></td>
-                            <td>{{ $row->url }}</td>
+                            <th>No</th>
+                            <th>Short URL</th>
+                            <th>URL</th>
+                            <th></th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div> --}}
+                    </thead>
+                    <tbody>
+                        @foreach ($data_url as $row)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td><a href="{{ route('shortened.url', $row->code) }}"
+                                        target="_blank">{{ route('shortened.url', $row->code) }}</a></td>
+                                <td>{{ $row->url }}</td>
+                                <td class="text-center">
+                                    <div class="d-flex gap-1">
+                                        <form action="{{ route('shorturl.edit') }}" method="get">
+                                            @csrf
+                                            <button class="btn btn-primary"><img src="assets/pencil-square.svg"></button>
+                                        </form>
+                                        <form action="{{ route('shorturl.delete', $data_url->id) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger"><img src="assets/trash.svg"></button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        @endauth
     </div>
 </body>
 

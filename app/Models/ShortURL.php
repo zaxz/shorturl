@@ -10,4 +10,8 @@ class ShortURL extends Model
     use HasFactory;
     protected $table = 'short_url';
     protected $fillable = ['code','url'];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }
